@@ -26,7 +26,6 @@ classdef SimvarKNN < Simvar
                 figure
                 plotconfusion(simvartrial.metrics(i).conffig{:})
             end
-            combinedval = 
         end
     end
 end
