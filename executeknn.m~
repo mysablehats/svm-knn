@@ -1,0 +1,8 @@
+function a = executeknn(pars,data)
+a = [];
+Y = data.train.y;
+
+
+disp('Hello!')
+
+end
