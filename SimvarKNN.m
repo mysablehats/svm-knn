@@ -21,12 +21,15 @@ classdef SimvarKNN < Simvar
             
         end
         function [endacc, combinedval] = analyze_outcomes(simvartrial)
-            disp('hello')
+            %disp('hello')
+            combinedval = zeros(size(simvartrial.metrics(1).val));
             for i =1:length(simvartrial.metrics)
                 figure
                 plotconfusion(simvartrial.metrics(i).conffig{:})
+                combinedval = combinedval + simvartrial.metrics(i).val;
             end
-            combinedval = 
+            combinedval = combinedval/length(simvartrial.metrics);
+            endacc = sum(diag(combinedval))/sum(sum(combinedval));
         end
     end
 end
