@@ -16,7 +16,7 @@ classdef SimvarSVM < Simvar
             %% Post initialization
             simvar.method = 'svm';
             simvar.excfun = @(data,ii)executesvm(simvar(ii).pars, data); %if pars is empty, this will not work!
-            simvar.PARA = 0; % im testing now
+            %simvar.PARA = 0; % im testing now
             
             
         end
