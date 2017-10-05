@@ -4,7 +4,7 @@ a = [];
 Yt = convertY(data.train.y);
 %Y = data.train.y;
 Xt = data.train.data.';
-t = templateSVM('Standardize',1,'KernelFunction','linear');
+t = templateSVM('Standardize',0,'KernelFunction','gaussian');
 
 mdl = fitcecoc(Xt,Yt,'Learners',t);
 classt = predict(mdl,Xt);
