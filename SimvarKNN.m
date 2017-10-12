@@ -10,7 +10,7 @@ classdef SimvarKNN < Simvar
             simvar = simvar@Simvar(varargin{:});
             
             
-            simvar.pars.numneighbours = 1;
+            simvar.pars.numneighbours = 10;
             
             
             %% Post initialization

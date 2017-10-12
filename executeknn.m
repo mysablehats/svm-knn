@@ -30,8 +30,9 @@ a.mt.conffig = {data.train.y, CCt,[ num2str(pars.numneighbours) '-NNtrain'], dat
 [~, a.mt.confusions.val, ~, a.mt.per.val] = confusion(data.val.y, CCv);
 [~, a.mt.confusions.train, ~, a.mt.per.train] = confusion(data.train.y, CCt);
 
+IDX = knnsearch(Xt,Xv,'K',pars.numneighbours);
 a.mdl = mdl;
-
+a.IDX = IDX;
 
 %disp('Hello!')
 
