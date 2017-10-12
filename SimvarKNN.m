@@ -16,7 +16,7 @@ classdef SimvarKNN < Simvar
             %% Post initialization
             simvar.method = 'knearest';
             simvar.excfun = @(data,ii)executeknn(simvar(ii).pars, data); %if pars is empty, this will not work!
-            simvar.PARA = 0; % im testing now
+            %simvar.PARA = 0; % im testing now
             
             
         end
