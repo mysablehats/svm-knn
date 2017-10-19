@@ -1,12 +1,11 @@
-function a = executesvm(pars,data)
+function a = executeMC(pars,data)
 a = [];
 
 Yt = convertY(data.train.y);
 %Y = data.train.y;
 Xt = data.train.data.';
-t = templateSVM('Standardize',1,'KernelFunction','gaussian');
 
-mdl = fitcecoc(Xt,Yt,'Learners',t);
+mdl = pars.fitfun(Xt,Yt);
 classt = predict(mdl,Xt);
 
 %%%% this seems suboptimal, but to compare with the other results we will do
@@ -23,16 +22,17 @@ classv = predict(mdl,Xv);
 CCv = deconvert(classv, data.val.y);
 
 figure
-plotconfusion(data.val.y, CCv, 'SVMval') %%% for KNN with K = 1, this is 100%...
+plotconfusion(data.val.y, CCv, pars.name ) %%% for KNN with K = 1, this is 100%...
 
 %%%% making mt
 
-a.mt.conffig = {data.train.y, CCt, 'SVMtrain', data.val.y, CCv, 'SVMval' };
+a.mt.conffig = {data.train.y, CCt,[ pars.name 'train'], data.val.y, CCv, [pars.name 'val'] };
 [~, a.mt.confusions.val, ~, a.mt.per.val] = confusion(data.val.y, CCv);
 [~, a.mt.confusions.train, ~, a.mt.per.train] = confusion(data.train.y, CCt);
 
+%IDX = knnsearch(Xt,Xv,'K',pars.numneighbours);
 a.mdl = mdl;
-
+a.IDX = eval(pars.postclassmethod);
 
 %disp('Hello!')
 
