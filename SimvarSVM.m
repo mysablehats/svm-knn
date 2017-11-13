@@ -1,4 +1,4 @@
-classdef SimvarSVM < Simvar
+classdef SimvarSVM < SimvarMC
     properties
         pars
     end

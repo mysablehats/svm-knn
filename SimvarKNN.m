@@ -1,22 +1,32 @@
-classdef SimvarKNN < Simvar
+classdef SimvarKNN < SimvarMC
     properties
-        pars
+        %pars
     end
     methods
         function simvar = SimvarKNN(varargin)
             %% Object Initialization %%
             % Call superclass constructor before accessing object
             % You cannot conditionalize this statement
-            simvar = simvar@Simvar(varargin{:});
+            simvar = simvar@SimvarMC(varargin{:});
             
-            
+            %%% for KNN
             simvar.pars.numneighbours = 1000;
-            
+            somefun = @fitcknn;
+            simvar.pars.fitpars = {'NumNeighbors',simvar.pars.numneighbours};
+            simvar.pars.postclassmethod = 'knnsearch(Xt,Xv,''K'',pars.numneighbours);';
+            simvar.pars.name = 'KNN';
+            simvar.method = 'knn';
             
             %% Post initialization
-            simvar.method = 'knearest';
-            simvar.excfun = @(data,ii)executeknn(simvar(ii).pars, data); %if pars is empty, this will not work!
+%             simvar.method = 'knearest';
+%             simvar.excfun = @(data,ii)executeknn(simvar(ii).pars, data); %if pars is empty, this will not work!
             %simvar.PARA = 0; % im testing now
+            
+            
+            
+            simvar.pars.fitfun = @(Xt,Yt)somefun(Xt,Yt,simvar.pars.fitpars{:});
+            simvar.excfun = @(data,ii)executeMC(simvar(ii).pars, data); %pars have to be fully defined up to here!
+           % simvar.PARA = 0; % im testing now
             
             
         end
