@@ -10,7 +10,7 @@ classdef SimvarKNN < SimvarMC
             simvar = simvar@SimvarMC(varargin{:});
             
             %%% for KNN
-            simvar.pars.numneighbours = 1000;
+            simvar.pars.numneighbours = 1;
             somefun = @fitcknn;
             simvar.pars.fitpars = {'NumNeighbors',simvar.pars.numneighbours};
             simvar.pars.postclassmethod = 'knnsearch(Xt,Xv,''K'',pars.numneighbours);';
